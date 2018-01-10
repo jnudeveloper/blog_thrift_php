@@ -21,6 +21,30 @@ class Query {
   static $_TSPEC;
 
   /**
+   * @var string
+   */
+  public $where = null;
+  /**
+   * @var int
+   */
+  public $limit = null;
+  /**
+   * @var int
+   */
+  public $offset = null;
+  /**
+   * @var array
+   */
+  public $orderBy = null;
+  /**
+   * @var string[]
+   */
+  public $select = null;
+  /**
+   * @var string
+   */
+  public $selectOption = null;
+  /**
    * @var bool
    */
   public $distinct = null;
@@ -33,43 +57,19 @@ class Query {
    */
   public $groupBy = null;
   /**
-   * @var string[]
-   */
-  public $having = null;
-  /**
-   * @var string[]
+   * @var string
    */
   public $join = null;
   /**
-   * @var int
+   * @var string
    */
-  public $limit = null;
+  public $having = null;
   /**
-   * @var int
-   */
-  public $offset = null;
-  /**
-   * @var string[]
-   */
-  public $on = null;
-  /**
-   * @var string[]
-   */
-  public $orderBy = null;
-  /**
-   * @var string[]
-   */
-  public $select = null;
-  /**
-   * @var string[]
+   * @var string
    */
   public $unions = null;
   /**
-   * @var \thriftgen\domain\Condition[]
-   */
-  public $where = null;
-  /**
-   * @var string[]
+   * @var array
    */
   public $params = null;
 
@@ -77,66 +77,30 @@ class Query {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
         1 => array(
-          'var' => 'distinct',
-          'type' => TType::BOOL,
+          'var' => 'where',
+          'type' => TType::STRING,
           ),
         2 => array(
-          'var' => 'fromTable',
-          'type' => TType::LST,
-          'etype' => TType::STRING,
-          'elem' => array(
-            'type' => TType::STRING,
-            ),
+          'var' => 'limit',
+          'type' => TType::I32,
           ),
         3 => array(
-          'var' => 'groupBy',
-          'type' => TType::LST,
-          'etype' => TType::STRING,
-          'elem' => array(
-            'type' => TType::STRING,
-            ),
+          'var' => 'offset',
+          'type' => TType::I32,
           ),
         4 => array(
-          'var' => 'having',
-          'type' => TType::LST,
-          'etype' => TType::STRING,
-          'elem' => array(
+          'var' => 'orderBy',
+          'type' => TType::MAP,
+          'ktype' => TType::STRING,
+          'vtype' => TType::STRING,
+          'key' => array(
+            'type' => TType::STRING,
+          ),
+          'val' => array(
             'type' => TType::STRING,
             ),
           ),
         5 => array(
-          'var' => 'join',
-          'type' => TType::LST,
-          'etype' => TType::STRING,
-          'elem' => array(
-            'type' => TType::STRING,
-            ),
-          ),
-        6 => array(
-          'var' => 'limit',
-          'type' => TType::I32,
-          ),
-        7 => array(
-          'var' => 'offset',
-          'type' => TType::I32,
-          ),
-        8 => array(
-          'var' => 'on',
-          'type' => TType::LST,
-          'etype' => TType::STRING,
-          'elem' => array(
-            'type' => TType::STRING,
-            ),
-          ),
-        9 => array(
-          'var' => 'orderBy',
-          'type' => TType::LST,
-          'etype' => TType::STRING,
-          'elem' => array(
-            'type' => TType::STRING,
-            ),
-          ),
-        10 => array(
           'var' => 'select',
           'type' => TType::LST,
           'etype' => TType::STRING,
@@ -144,34 +108,75 @@ class Query {
             'type' => TType::STRING,
             ),
           ),
-        11 => array(
-          'var' => 'unions',
+        6 => array(
+          'var' => 'selectOption',
+          'type' => TType::STRING,
+          ),
+        7 => array(
+          'var' => 'distinct',
+          'type' => TType::BOOL,
+          ),
+        8 => array(
+          'var' => 'fromTable',
           'type' => TType::LST,
           'etype' => TType::STRING,
           'elem' => array(
             'type' => TType::STRING,
             ),
           ),
-        12 => array(
-          'var' => 'where',
-          'type' => TType::LST,
-          'etype' => TType::STRUCT,
-          'elem' => array(
-            'type' => TType::STRUCT,
-            'class' => '\thriftgen\domain\Condition',
-            ),
-          ),
-        13 => array(
-          'var' => 'params',
+        9 => array(
+          'var' => 'groupBy',
           'type' => TType::LST,
           'etype' => TType::STRING,
           'elem' => array(
+            'type' => TType::STRING,
+            ),
+          ),
+        10 => array(
+          'var' => 'join',
+          'type' => TType::STRING,
+          ),
+        11 => array(
+          'var' => 'having',
+          'type' => TType::STRING,
+          ),
+        12 => array(
+          'var' => 'unions',
+          'type' => TType::STRING,
+          ),
+        13 => array(
+          'var' => 'params',
+          'type' => TType::MAP,
+          'ktype' => TType::STRING,
+          'vtype' => TType::STRING,
+          'key' => array(
+            'type' => TType::STRING,
+          ),
+          'val' => array(
             'type' => TType::STRING,
             ),
           ),
         );
     }
     if (is_array($vals)) {
+      if (isset($vals['where'])) {
+        $this->where = $vals['where'];
+      }
+      if (isset($vals['limit'])) {
+        $this->limit = $vals['limit'];
+      }
+      if (isset($vals['offset'])) {
+        $this->offset = $vals['offset'];
+      }
+      if (isset($vals['orderBy'])) {
+        $this->orderBy = $vals['orderBy'];
+      }
+      if (isset($vals['select'])) {
+        $this->select = $vals['select'];
+      }
+      if (isset($vals['selectOption'])) {
+        $this->selectOption = $vals['selectOption'];
+      }
       if (isset($vals['distinct'])) {
         $this->distinct = $vals['distinct'];
       }
@@ -181,32 +186,14 @@ class Query {
       if (isset($vals['groupBy'])) {
         $this->groupBy = $vals['groupBy'];
       }
-      if (isset($vals['having'])) {
-        $this->having = $vals['having'];
-      }
       if (isset($vals['join'])) {
         $this->join = $vals['join'];
       }
-      if (isset($vals['limit'])) {
-        $this->limit = $vals['limit'];
-      }
-      if (isset($vals['offset'])) {
-        $this->offset = $vals['offset'];
-      }
-      if (isset($vals['on'])) {
-        $this->on = $vals['on'];
-      }
-      if (isset($vals['orderBy'])) {
-        $this->orderBy = $vals['orderBy'];
-      }
-      if (isset($vals['select'])) {
-        $this->select = $vals['select'];
+      if (isset($vals['having'])) {
+        $this->having = $vals['having'];
       }
       if (isset($vals['unions'])) {
         $this->unions = $vals['unions'];
-      }
-      if (isset($vals['where'])) {
-        $this->where = $vals['where'];
       }
       if (isset($vals['params'])) {
         $this->params = $vals['params'];
@@ -234,74 +221,57 @@ class Query {
       switch ($fid)
       {
         case 1:
-          if ($ftype == TType::BOOL) {
-            $xfer += $input->readBool($this->distinct);
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->where);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 2:
-          if ($ftype == TType::LST) {
-            $this->fromTable = array();
-            $_size0 = 0;
-            $_etype3 = 0;
-            $xfer += $input->readListBegin($_etype3, $_size0);
-            for ($_i4 = 0; $_i4 < $_size0; ++$_i4)
-            {
-              $elem5 = null;
-              $xfer += $input->readString($elem5);
-              $this->fromTable []= $elem5;
-            }
-            $xfer += $input->readListEnd();
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->limit);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 3:
-          if ($ftype == TType::LST) {
-            $this->groupBy = array();
-            $_size6 = 0;
-            $_etype9 = 0;
-            $xfer += $input->readListBegin($_etype9, $_size6);
-            for ($_i10 = 0; $_i10 < $_size6; ++$_i10)
-            {
-              $elem11 = null;
-              $xfer += $input->readString($elem11);
-              $this->groupBy []= $elem11;
-            }
-            $xfer += $input->readListEnd();
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->offset);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 4:
-          if ($ftype == TType::LST) {
-            $this->having = array();
-            $_size12 = 0;
-            $_etype15 = 0;
-            $xfer += $input->readListBegin($_etype15, $_size12);
-            for ($_i16 = 0; $_i16 < $_size12; ++$_i16)
+          if ($ftype == TType::MAP) {
+            $this->orderBy = array();
+            $_size0 = 0;
+            $_ktype1 = 0;
+            $_vtype2 = 0;
+            $xfer += $input->readMapBegin($_ktype1, $_vtype2, $_size0);
+            for ($_i4 = 0; $_i4 < $_size0; ++$_i4)
             {
-              $elem17 = null;
-              $xfer += $input->readString($elem17);
-              $this->having []= $elem17;
+              $key5 = '';
+              $val6 = '';
+              $xfer += $input->readString($key5);
+              $xfer += $input->readString($val6);
+              $this->orderBy[$key5] = $val6;
             }
-            $xfer += $input->readListEnd();
+            $xfer += $input->readMapEnd();
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 5:
           if ($ftype == TType::LST) {
-            $this->join = array();
-            $_size18 = 0;
-            $_etype21 = 0;
-            $xfer += $input->readListBegin($_etype21, $_size18);
-            for ($_i22 = 0; $_i22 < $_size18; ++$_i22)
+            $this->select = array();
+            $_size7 = 0;
+            $_etype10 = 0;
+            $xfer += $input->readListBegin($_etype10, $_size7);
+            for ($_i11 = 0; $_i11 < $_size7; ++$_i11)
             {
-              $elem23 = null;
-              $xfer += $input->readString($elem23);
-              $this->join []= $elem23;
+              $elem12 = null;
+              $xfer += $input->readString($elem12);
+              $this->select []= $elem12;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -309,30 +279,30 @@ class Query {
           }
           break;
         case 6:
-          if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->limit);
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->selectOption);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 7:
-          if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->offset);
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->distinct);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 8:
           if ($ftype == TType::LST) {
-            $this->on = array();
-            $_size24 = 0;
-            $_etype27 = 0;
-            $xfer += $input->readListBegin($_etype27, $_size24);
-            for ($_i28 = 0; $_i28 < $_size24; ++$_i28)
+            $this->fromTable = array();
+            $_size13 = 0;
+            $_etype16 = 0;
+            $xfer += $input->readListBegin($_etype16, $_size13);
+            for ($_i17 = 0; $_i17 < $_size13; ++$_i17)
             {
-              $elem29 = null;
-              $xfer += $input->readString($elem29);
-              $this->on []= $elem29;
+              $elem18 = null;
+              $xfer += $input->readString($elem18);
+              $this->fromTable []= $elem18;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -341,15 +311,15 @@ class Query {
           break;
         case 9:
           if ($ftype == TType::LST) {
-            $this->orderBy = array();
-            $_size30 = 0;
-            $_etype33 = 0;
-            $xfer += $input->readListBegin($_etype33, $_size30);
-            for ($_i34 = 0; $_i34 < $_size30; ++$_i34)
+            $this->groupBy = array();
+            $_size19 = 0;
+            $_etype22 = 0;
+            $xfer += $input->readListBegin($_etype22, $_size19);
+            for ($_i23 = 0; $_i23 < $_size19; ++$_i23)
             {
-              $elem35 = null;
-              $xfer += $input->readString($elem35);
-              $this->orderBy []= $elem35;
+              $elem24 = null;
+              $xfer += $input->readString($elem24);
+              $this->groupBy []= $elem24;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -357,70 +327,42 @@ class Query {
           }
           break;
         case 10:
-          if ($ftype == TType::LST) {
-            $this->select = array();
-            $_size36 = 0;
-            $_etype39 = 0;
-            $xfer += $input->readListBegin($_etype39, $_size36);
-            for ($_i40 = 0; $_i40 < $_size36; ++$_i40)
-            {
-              $elem41 = null;
-              $xfer += $input->readString($elem41);
-              $this->select []= $elem41;
-            }
-            $xfer += $input->readListEnd();
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->join);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 11:
-          if ($ftype == TType::LST) {
-            $this->unions = array();
-            $_size42 = 0;
-            $_etype45 = 0;
-            $xfer += $input->readListBegin($_etype45, $_size42);
-            for ($_i46 = 0; $_i46 < $_size42; ++$_i46)
-            {
-              $elem47 = null;
-              $xfer += $input->readString($elem47);
-              $this->unions []= $elem47;
-            }
-            $xfer += $input->readListEnd();
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->having);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 12:
-          if ($ftype == TType::LST) {
-            $this->where = array();
-            $_size48 = 0;
-            $_etype51 = 0;
-            $xfer += $input->readListBegin($_etype51, $_size48);
-            for ($_i52 = 0; $_i52 < $_size48; ++$_i52)
-            {
-              $elem53 = null;
-              $elem53 = new \thriftgen\domain\Condition();
-              $xfer += $elem53->read($input);
-              $this->where []= $elem53;
-            }
-            $xfer += $input->readListEnd();
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->unions);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 13:
-          if ($ftype == TType::LST) {
+          if ($ftype == TType::MAP) {
             $this->params = array();
-            $_size54 = 0;
-            $_etype57 = 0;
-            $xfer += $input->readListBegin($_etype57, $_size54);
-            for ($_i58 = 0; $_i58 < $_size54; ++$_i58)
+            $_size25 = 0;
+            $_ktype26 = 0;
+            $_vtype27 = 0;
+            $xfer += $input->readMapBegin($_ktype26, $_vtype27, $_size25);
+            for ($_i29 = 0; $_i29 < $_size25; ++$_i29)
             {
-              $elem59 = null;
-              $xfer += $input->readString($elem59);
-              $this->params []= $elem59;
+              $key30 = '';
+              $val31 = '';
+              $xfer += $input->readString($key30);
+              $xfer += $input->readString($val31);
+              $this->params[$key30] = $val31;
             }
-            $xfer += $input->readListEnd();
+            $xfer += $input->readMapEnd();
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -438,8 +380,63 @@ class Query {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('Query');
+    if ($this->where !== null) {
+      $xfer += $output->writeFieldBegin('where', TType::STRING, 1);
+      $xfer += $output->writeString($this->where);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->limit !== null) {
+      $xfer += $output->writeFieldBegin('limit', TType::I32, 2);
+      $xfer += $output->writeI32($this->limit);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->offset !== null) {
+      $xfer += $output->writeFieldBegin('offset', TType::I32, 3);
+      $xfer += $output->writeI32($this->offset);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->orderBy !== null) {
+      if (!is_array($this->orderBy)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('orderBy', TType::MAP, 4);
+      {
+        $output->writeMapBegin(TType::STRING, TType::STRING, count($this->orderBy));
+        {
+          foreach ($this->orderBy as $kiter32 => $viter33)
+          {
+            $xfer += $output->writeString($kiter32);
+            $xfer += $output->writeString($viter33);
+          }
+        }
+        $output->writeMapEnd();
+      }
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->select !== null) {
+      if (!is_array($this->select)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('select', TType::LST, 5);
+      {
+        $output->writeListBegin(TType::STRING, count($this->select));
+        {
+          foreach ($this->select as $iter34)
+          {
+            $xfer += $output->writeString($iter34);
+          }
+        }
+        $output->writeListEnd();
+      }
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->selectOption !== null) {
+      $xfer += $output->writeFieldBegin('selectOption', TType::STRING, 6);
+      $xfer += $output->writeString($this->selectOption);
+      $xfer += $output->writeFieldEnd();
+    }
     if ($this->distinct !== null) {
-      $xfer += $output->writeFieldBegin('distinct', TType::BOOL, 1);
+      $xfer += $output->writeFieldBegin('distinct', TType::BOOL, 7);
       $xfer += $output->writeBool($this->distinct);
       $xfer += $output->writeFieldEnd();
     }
@@ -447,13 +444,13 @@ class Query {
       if (!is_array($this->fromTable)) {
         throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
       }
-      $xfer += $output->writeFieldBegin('fromTable', TType::LST, 2);
+      $xfer += $output->writeFieldBegin('fromTable', TType::LST, 8);
       {
         $output->writeListBegin(TType::STRING, count($this->fromTable));
         {
-          foreach ($this->fromTable as $iter60)
+          foreach ($this->fromTable as $iter35)
           {
-            $xfer += $output->writeString($iter60);
+            $xfer += $output->writeString($iter35);
           }
         }
         $output->writeListEnd();
@@ -464,30 +461,13 @@ class Query {
       if (!is_array($this->groupBy)) {
         throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
       }
-      $xfer += $output->writeFieldBegin('groupBy', TType::LST, 3);
+      $xfer += $output->writeFieldBegin('groupBy', TType::LST, 9);
       {
         $output->writeListBegin(TType::STRING, count($this->groupBy));
         {
-          foreach ($this->groupBy as $iter61)
+          foreach ($this->groupBy as $iter36)
           {
-            $xfer += $output->writeString($iter61);
-          }
-        }
-        $output->writeListEnd();
-      }
-      $xfer += $output->writeFieldEnd();
-    }
-    if ($this->having !== null) {
-      if (!is_array($this->having)) {
-        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
-      }
-      $xfer += $output->writeFieldBegin('having', TType::LST, 4);
-      {
-        $output->writeListBegin(TType::STRING, count($this->having));
-        {
-          foreach ($this->having as $iter62)
-          {
-            $xfer += $output->writeString($iter62);
+            $xfer += $output->writeString($iter36);
           }
         }
         $output->writeListEnd();
@@ -495,131 +475,35 @@ class Query {
       $xfer += $output->writeFieldEnd();
     }
     if ($this->join !== null) {
-      if (!is_array($this->join)) {
-        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
-      }
-      $xfer += $output->writeFieldBegin('join', TType::LST, 5);
-      {
-        $output->writeListBegin(TType::STRING, count($this->join));
-        {
-          foreach ($this->join as $iter63)
-          {
-            $xfer += $output->writeString($iter63);
-          }
-        }
-        $output->writeListEnd();
-      }
+      $xfer += $output->writeFieldBegin('join', TType::STRING, 10);
+      $xfer += $output->writeString($this->join);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->limit !== null) {
-      $xfer += $output->writeFieldBegin('limit', TType::I32, 6);
-      $xfer += $output->writeI32($this->limit);
-      $xfer += $output->writeFieldEnd();
-    }
-    if ($this->offset !== null) {
-      $xfer += $output->writeFieldBegin('offset', TType::I32, 7);
-      $xfer += $output->writeI32($this->offset);
-      $xfer += $output->writeFieldEnd();
-    }
-    if ($this->on !== null) {
-      if (!is_array($this->on)) {
-        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
-      }
-      $xfer += $output->writeFieldBegin('on', TType::LST, 8);
-      {
-        $output->writeListBegin(TType::STRING, count($this->on));
-        {
-          foreach ($this->on as $iter64)
-          {
-            $xfer += $output->writeString($iter64);
-          }
-        }
-        $output->writeListEnd();
-      }
-      $xfer += $output->writeFieldEnd();
-    }
-    if ($this->orderBy !== null) {
-      if (!is_array($this->orderBy)) {
-        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
-      }
-      $xfer += $output->writeFieldBegin('orderBy', TType::LST, 9);
-      {
-        $output->writeListBegin(TType::STRING, count($this->orderBy));
-        {
-          foreach ($this->orderBy as $iter65)
-          {
-            $xfer += $output->writeString($iter65);
-          }
-        }
-        $output->writeListEnd();
-      }
-      $xfer += $output->writeFieldEnd();
-    }
-    if ($this->select !== null) {
-      if (!is_array($this->select)) {
-        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
-      }
-      $xfer += $output->writeFieldBegin('select', TType::LST, 10);
-      {
-        $output->writeListBegin(TType::STRING, count($this->select));
-        {
-          foreach ($this->select as $iter66)
-          {
-            $xfer += $output->writeString($iter66);
-          }
-        }
-        $output->writeListEnd();
-      }
+    if ($this->having !== null) {
+      $xfer += $output->writeFieldBegin('having', TType::STRING, 11);
+      $xfer += $output->writeString($this->having);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->unions !== null) {
-      if (!is_array($this->unions)) {
-        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
-      }
-      $xfer += $output->writeFieldBegin('unions', TType::LST, 11);
-      {
-        $output->writeListBegin(TType::STRING, count($this->unions));
-        {
-          foreach ($this->unions as $iter67)
-          {
-            $xfer += $output->writeString($iter67);
-          }
-        }
-        $output->writeListEnd();
-      }
-      $xfer += $output->writeFieldEnd();
-    }
-    if ($this->where !== null) {
-      if (!is_array($this->where)) {
-        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
-      }
-      $xfer += $output->writeFieldBegin('where', TType::LST, 12);
-      {
-        $output->writeListBegin(TType::STRUCT, count($this->where));
-        {
-          foreach ($this->where as $iter68)
-          {
-            $xfer += $iter68->write($output);
-          }
-        }
-        $output->writeListEnd();
-      }
+      $xfer += $output->writeFieldBegin('unions', TType::STRING, 12);
+      $xfer += $output->writeString($this->unions);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->params !== null) {
       if (!is_array($this->params)) {
         throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
       }
-      $xfer += $output->writeFieldBegin('params', TType::LST, 13);
+      $xfer += $output->writeFieldBegin('params', TType::MAP, 13);
       {
-        $output->writeListBegin(TType::STRING, count($this->params));
+        $output->writeMapBegin(TType::STRING, TType::STRING, count($this->params));
         {
-          foreach ($this->params as $iter69)
+          foreach ($this->params as $kiter37 => $viter38)
           {
-            $xfer += $output->writeString($iter69);
+            $xfer += $output->writeString($kiter37);
+            $xfer += $output->writeString($viter38);
           }
         }
-        $output->writeListEnd();
+        $output->writeMapEnd();
       }
       $xfer += $output->writeFieldEnd();
     }
