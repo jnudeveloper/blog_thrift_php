@@ -27,13 +27,13 @@ class PostServiceClient implements \thriftgen\service\PostServiceIf {
     $this->output_ = $output ? $output : $input;
   }
 
-  public function find(\thriftgen\domain\Query $query)
+  public function find(\thriftgen\domain\TQuery $query)
   {
     $this->send_find($query);
     return $this->recv_find();
   }
 
-  public function send_find(\thriftgen\domain\Query $query)
+  public function send_find(\thriftgen\domain\TQuery $query)
   {
     $args = new \thriftgen\service\PostService_find_args();
     $args->query = $query;
@@ -78,13 +78,13 @@ class PostServiceClient implements \thriftgen\service\PostServiceIf {
     throw new \Exception("find failed: unknown result");
   }
 
-  public function create(\thriftgen\domain\Post $post)
+  public function create(\thriftgen\domain\TPost $post)
   {
     $this->send_create($post);
     return $this->recv_create();
   }
 
-  public function send_create(\thriftgen\domain\Post $post)
+  public function send_create(\thriftgen\domain\TPost $post)
   {
     $args = new \thriftgen\service\PostService_create_args();
     $args->post = $post;
@@ -129,13 +129,13 @@ class PostServiceClient implements \thriftgen\service\PostServiceIf {
     throw new \Exception("create failed: unknown result");
   }
 
-  public function createWithTags(\thriftgen\domain\Post $post, array $tagList)
+  public function createWithTags(\thriftgen\domain\TPost $post, array $tagList)
   {
     $this->send_createWithTags($post, $tagList);
     return $this->recv_createWithTags();
   }
 
-  public function send_createWithTags(\thriftgen\domain\Post $post, array $tagList)
+  public function send_createWithTags(\thriftgen\domain\TPost $post, array $tagList)
   {
     $args = new \thriftgen\service\PostService_createWithTags_args();
     $args->post = $post;
@@ -181,13 +181,13 @@ class PostServiceClient implements \thriftgen\service\PostServiceIf {
     throw new \Exception("createWithTags failed: unknown result");
   }
 
-  public function update(\thriftgen\domain\Post $post)
+  public function update(\thriftgen\domain\TPost $post)
   {
     $this->send_update($post);
     return $this->recv_update();
   }
 
-  public function send_update(\thriftgen\domain\Post $post)
+  public function send_update(\thriftgen\domain\TPost $post)
   {
     $args = new \thriftgen\service\PostService_update_args();
     $args->post = $post;
@@ -232,13 +232,13 @@ class PostServiceClient implements \thriftgen\service\PostServiceIf {
     throw new \Exception("update failed: unknown result");
   }
 
-  public function updateWithTags(\thriftgen\domain\Post $post, array $tagList)
+  public function updateWithTags(\thriftgen\domain\TPost $post, array $tagList)
   {
     $this->send_updateWithTags($post, $tagList);
     return $this->recv_updateWithTags();
   }
 
-  public function send_updateWithTags(\thriftgen\domain\Post $post, array $tagList)
+  public function send_updateWithTags(\thriftgen\domain\TPost $post, array $tagList)
   {
     $args = new \thriftgen\service\PostService_updateWithTags_args();
     $args->post = $post;

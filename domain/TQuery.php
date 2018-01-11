@@ -17,7 +17,7 @@ use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
 
-class Query {
+class TQuery {
   static $_TSPEC;
 
   /**
@@ -202,7 +202,7 @@ class Query {
   }
 
   public function getName() {
-    return 'Query';
+    return 'TQuery';
   }
 
   public function read($input)
@@ -379,7 +379,7 @@ class Query {
 
   public function write($output) {
     $xfer = 0;
-    $xfer += $output->writeStructBegin('Query');
+    $xfer += $output->writeStructBegin('TQuery');
     if ($this->where !== null) {
       $xfer += $output->writeFieldBegin('where', TType::STRING, 1);
       $xfer += $output->writeString($this->where);

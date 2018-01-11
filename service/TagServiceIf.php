@@ -18,23 +18,23 @@ use Thrift\Exception\TApplicationException;
 
 interface TagServiceIf {
   /**
-   * @param \thriftgen\domain\Query $query
-   * @return \thriftgen\domain\Tag[]
+   * @param \thriftgen\domain\TQuery $query
+   * @return \thriftgen\domain\TTag[]
    */
-  public function find(\thriftgen\domain\Query $query);
+  public function find(\thriftgen\domain\TQuery $query);
   /**
-   * @param \thriftgen\domain\Tag $tag
-   * @return \thriftgen\domain\CUDResult
+   * @param \thriftgen\domain\TTag $tag
+   * @return \thriftgen\domain\TCUDResult
    */
-  public function create(\thriftgen\domain\Tag $tag);
+  public function create(\thriftgen\domain\TTag $tag);
   /**
-   * @param \thriftgen\domain\Tag $tag
-   * @return \thriftgen\domain\CUDResult
+   * @param \thriftgen\domain\TTag $tag
+   * @return \thriftgen\domain\TCUDResult
    */
-  public function update(\thriftgen\domain\Tag $tag);
+  public function update(\thriftgen\domain\TTag $tag);
   /**
    * @param int $id
-   * @return \thriftgen\domain\CUDResult
+   * @return \thriftgen\domain\TCUDResult
    */
   public function deleteById($id);
 }

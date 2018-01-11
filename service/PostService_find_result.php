@@ -20,7 +20,7 @@ class PostService_find_result {
   static $_TSPEC;
 
   /**
-   * @var \thriftgen\domain\Post[]
+   * @var \thriftgen\domain\TPost[]
    */
   public $success = null;
 
@@ -33,7 +33,7 @@ class PostService_find_result {
           'etype' => TType::STRUCT,
           'elem' => array(
             'type' => TType::STRUCT,
-            'class' => '\thriftgen\domain\Post',
+            'class' => '\thriftgen\domain\TPost',
             ),
           ),
         );
@@ -73,7 +73,7 @@ class PostService_find_result {
             for ($_i4 = 0; $_i4 < $_size0; ++$_i4)
             {
               $elem5 = null;
-              $elem5 = new \thriftgen\domain\Post();
+              $elem5 = new \thriftgen\domain\TPost();
               $xfer += $elem5->read($input);
               $this->success []= $elem5;
             }

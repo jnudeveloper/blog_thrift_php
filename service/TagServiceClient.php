@@ -27,13 +27,13 @@ class TagServiceClient implements \thriftgen\service\TagServiceIf {
     $this->output_ = $output ? $output : $input;
   }
 
-  public function find(\thriftgen\domain\Query $query)
+  public function find(\thriftgen\domain\TQuery $query)
   {
     $this->send_find($query);
     return $this->recv_find();
   }
 
-  public function send_find(\thriftgen\domain\Query $query)
+  public function send_find(\thriftgen\domain\TQuery $query)
   {
     $args = new \thriftgen\service\TagService_find_args();
     $args->query = $query;
@@ -78,13 +78,13 @@ class TagServiceClient implements \thriftgen\service\TagServiceIf {
     throw new \Exception("find failed: unknown result");
   }
 
-  public function create(\thriftgen\domain\Tag $tag)
+  public function create(\thriftgen\domain\TTag $tag)
   {
     $this->send_create($tag);
     return $this->recv_create();
   }
 
-  public function send_create(\thriftgen\domain\Tag $tag)
+  public function send_create(\thriftgen\domain\TTag $tag)
   {
     $args = new \thriftgen\service\TagService_create_args();
     $args->tag = $tag;
@@ -129,13 +129,13 @@ class TagServiceClient implements \thriftgen\service\TagServiceIf {
     throw new \Exception("create failed: unknown result");
   }
 
-  public function update(\thriftgen\domain\Tag $tag)
+  public function update(\thriftgen\domain\TTag $tag)
   {
     $this->send_update($tag);
     return $this->recv_update();
   }
 
-  public function send_update(\thriftgen\domain\Tag $tag)
+  public function send_update(\thriftgen\domain\TTag $tag)
   {
     $args = new \thriftgen\service\TagService_update_args();
     $args->tag = $tag;

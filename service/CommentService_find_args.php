@@ -20,7 +20,7 @@ class CommentService_find_args {
   static $_TSPEC;
 
   /**
-   * @var \thriftgen\domain\Query
+   * @var \thriftgen\domain\TQuery
    */
   public $query = null;
 
@@ -30,7 +30,7 @@ class CommentService_find_args {
         1 => array(
           'var' => 'query',
           'type' => TType::STRUCT,
-          'class' => '\thriftgen\domain\Query',
+          'class' => '\thriftgen\domain\TQuery',
           ),
         );
     }
@@ -62,7 +62,7 @@ class CommentService_find_args {
       {
         case 1:
           if ($ftype == TType::STRUCT) {
-            $this->query = new \thriftgen\domain\Query();
+            $this->query = new \thriftgen\domain\TQuery();
             $xfer += $this->query->read($input);
           } else {
             $xfer += $input->skip($ftype);

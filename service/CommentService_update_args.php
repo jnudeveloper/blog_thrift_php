@@ -20,7 +20,7 @@ class CommentService_update_args {
   static $_TSPEC;
 
   /**
-   * @var \thriftgen\domain\Comment
+   * @var \thriftgen\domain\TComment
    */
   public $comment = null;
 
@@ -30,7 +30,7 @@ class CommentService_update_args {
         1 => array(
           'var' => 'comment',
           'type' => TType::STRUCT,
-          'class' => '\thriftgen\domain\Comment',
+          'class' => '\thriftgen\domain\TComment',
           ),
         );
     }
@@ -62,7 +62,7 @@ class CommentService_update_args {
       {
         case 1:
           if ($ftype == TType::STRUCT) {
-            $this->comment = new \thriftgen\domain\Comment();
+            $this->comment = new \thriftgen\domain\TComment();
             $xfer += $this->comment->read($input);
           } else {
             $xfer += $input->skip($ftype);

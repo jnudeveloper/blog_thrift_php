@@ -17,7 +17,7 @@ use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
 
-class Post {
+class TPost {
   static $_TSPEC;
 
   /**
@@ -152,7 +152,7 @@ class Post {
   }
 
   public function getName() {
-    return 'Post';
+    return 'TPost';
   }
 
   public function read($input)
@@ -259,7 +259,7 @@ class Post {
 
   public function write($output) {
     $xfer = 0;
-    $xfer += $output->writeStructBegin('Post');
+    $xfer += $output->writeStructBegin('TPost');
     if ($this->id !== null) {
       $xfer += $output->writeFieldBegin('id', TType::I32, 1);
       $xfer += $output->writeI32($this->id);

@@ -18,23 +18,23 @@ use Thrift\Exception\TApplicationException;
 
 interface CommentServiceIf {
   /**
-   * @param \thriftgen\domain\Query $query
-   * @return \thriftgen\domain\Comment[]
+   * @param \thriftgen\domain\TQuery $query
+   * @return \thriftgen\domain\TComment[]
    */
-  public function find(\thriftgen\domain\Query $query);
+  public function find(\thriftgen\domain\TQuery $query);
   /**
-   * @param \thriftgen\domain\Comment $comment
-   * @return \thriftgen\domain\CUDResult
+   * @param \thriftgen\domain\TComment $comment
+   * @return \thriftgen\domain\TCUDResult
    */
-  public function create(\thriftgen\domain\Comment $comment);
+  public function create(\thriftgen\domain\TComment $comment);
   /**
-   * @param \thriftgen\domain\Comment $comment
-   * @return \thriftgen\domain\CUDResult
+   * @param \thriftgen\domain\TComment $comment
+   * @return \thriftgen\domain\TCUDResult
    */
-  public function update(\thriftgen\domain\Comment $comment);
+  public function update(\thriftgen\domain\TComment $comment);
   /**
    * @param int $id
-   * @return \thriftgen\domain\CUDResult
+   * @return \thriftgen\domain\TCUDResult
    */
   public function deleteById($id);
 }

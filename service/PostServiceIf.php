@@ -18,35 +18,35 @@ use Thrift\Exception\TApplicationException;
 
 interface PostServiceIf {
   /**
-   * @param \thriftgen\domain\Query $query
-   * @return \thriftgen\domain\Post[]
+   * @param \thriftgen\domain\TQuery $query
+   * @return \thriftgen\domain\TPost[]
    */
-  public function find(\thriftgen\domain\Query $query);
+  public function find(\thriftgen\domain\TQuery $query);
   /**
-   * @param \thriftgen\domain\Post $post
-   * @return \thriftgen\domain\CUDResult
+   * @param \thriftgen\domain\TPost $post
+   * @return \thriftgen\domain\TCUDResult
    */
-  public function create(\thriftgen\domain\Post $post);
+  public function create(\thriftgen\domain\TPost $post);
   /**
-   * @param \thriftgen\domain\Post $post
-   * @param \thriftgen\domain\Tag[] $tagList
-   * @return \thriftgen\domain\CUDResult
+   * @param \thriftgen\domain\TPost $post
+   * @param \thriftgen\domain\TTag[] $tagList
+   * @return \thriftgen\domain\TCUDResult
    */
-  public function createWithTags(\thriftgen\domain\Post $post, array $tagList);
+  public function createWithTags(\thriftgen\domain\TPost $post, array $tagList);
   /**
-   * @param \thriftgen\domain\Post $post
-   * @return \thriftgen\domain\CUDResult
+   * @param \thriftgen\domain\TPost $post
+   * @return \thriftgen\domain\TCUDResult
    */
-  public function update(\thriftgen\domain\Post $post);
+  public function update(\thriftgen\domain\TPost $post);
   /**
-   * @param \thriftgen\domain\Post $post
-   * @param \thriftgen\domain\Tag[] $tagList
-   * @return \thriftgen\domain\CUDResult
+   * @param \thriftgen\domain\TPost $post
+   * @param \thriftgen\domain\TTag[] $tagList
+   * @return \thriftgen\domain\TCUDResult
    */
-  public function updateWithTags(\thriftgen\domain\Post $post, array $tagList);
+  public function updateWithTags(\thriftgen\domain\TPost $post, array $tagList);
   /**
    * @param int $id
-   * @return \thriftgen\domain\CUDResult
+   * @return \thriftgen\domain\TCUDResult
    */
   public function deleteById($id);
 }

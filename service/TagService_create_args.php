@@ -20,7 +20,7 @@ class TagService_create_args {
   static $_TSPEC;
 
   /**
-   * @var \thriftgen\domain\Tag
+   * @var \thriftgen\domain\TTag
    */
   public $tag = null;
 
@@ -30,7 +30,7 @@ class TagService_create_args {
         1 => array(
           'var' => 'tag',
           'type' => TType::STRUCT,
-          'class' => '\thriftgen\domain\Tag',
+          'class' => '\thriftgen\domain\TTag',
           ),
         );
     }
@@ -62,7 +62,7 @@ class TagService_create_args {
       {
         case 1:
           if ($ftype == TType::STRUCT) {
-            $this->tag = new \thriftgen\domain\Tag();
+            $this->tag = new \thriftgen\domain\TTag();
             $xfer += $this->tag->read($input);
           } else {
             $xfer += $input->skip($ftype);

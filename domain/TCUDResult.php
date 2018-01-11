@@ -17,7 +17,7 @@ use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
 
-class CUDResult {
+class TCUDResult {
   static $_TSPEC;
 
   /**
@@ -64,7 +64,7 @@ class CUDResult {
   }
 
   public function getName() {
-    return 'CUDResult';
+    return 'TCUDResult';
   }
 
   public function read($input)
@@ -115,7 +115,7 @@ class CUDResult {
 
   public function write($output) {
     $xfer = 0;
-    $xfer += $output->writeStructBegin('CUDResult');
+    $xfer += $output->writeStructBegin('TCUDResult');
     if ($this->code !== null) {
       $xfer += $output->writeFieldBegin('code', TType::I32, 1);
       $xfer += $output->writeI32($this->code);

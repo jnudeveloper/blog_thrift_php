@@ -27,13 +27,13 @@ class CommentServiceClient implements \thriftgen\service\CommentServiceIf {
     $this->output_ = $output ? $output : $input;
   }
 
-  public function find(\thriftgen\domain\Query $query)
+  public function find(\thriftgen\domain\TQuery $query)
   {
     $this->send_find($query);
     return $this->recv_find();
   }
 
-  public function send_find(\thriftgen\domain\Query $query)
+  public function send_find(\thriftgen\domain\TQuery $query)
   {
     $args = new \thriftgen\service\CommentService_find_args();
     $args->query = $query;
@@ -78,13 +78,13 @@ class CommentServiceClient implements \thriftgen\service\CommentServiceIf {
     throw new \Exception("find failed: unknown result");
   }
 
-  public function create(\thriftgen\domain\Comment $comment)
+  public function create(\thriftgen\domain\TComment $comment)
   {
     $this->send_create($comment);
     return $this->recv_create();
   }
 
-  public function send_create(\thriftgen\domain\Comment $comment)
+  public function send_create(\thriftgen\domain\TComment $comment)
   {
     $args = new \thriftgen\service\CommentService_create_args();
     $args->comment = $comment;
@@ -129,13 +129,13 @@ class CommentServiceClient implements \thriftgen\service\CommentServiceIf {
     throw new \Exception("create failed: unknown result");
   }
 
-  public function update(\thriftgen\domain\Comment $comment)
+  public function update(\thriftgen\domain\TComment $comment)
   {
     $this->send_update($comment);
     return $this->recv_update();
   }
 
-  public function send_update(\thriftgen\domain\Comment $comment)
+  public function send_update(\thriftgen\domain\TComment $comment)
   {
     $args = new \thriftgen\service\CommentService_update_args();
     $args->comment = $comment;

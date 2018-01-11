@@ -17,7 +17,7 @@ use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
 
-class Comment {
+class TComment {
   static $_TSPEC;
 
   /**
@@ -130,7 +130,7 @@ class Comment {
   }
 
   public function getName() {
-    return 'Comment';
+    return 'TComment';
   }
 
   public function read($input)
@@ -223,7 +223,7 @@ class Comment {
 
   public function write($output) {
     $xfer = 0;
-    $xfer += $output->writeStructBegin('Comment');
+    $xfer += $output->writeStructBegin('TComment');
     if ($this->id !== null) {
       $xfer += $output->writeFieldBegin('id', TType::I32, 1);
       $xfer += $output->writeI32($this->id);

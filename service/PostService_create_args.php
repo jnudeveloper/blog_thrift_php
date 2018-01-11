@@ -20,7 +20,7 @@ class PostService_create_args {
   static $_TSPEC;
 
   /**
-   * @var \thriftgen\domain\Post
+   * @var \thriftgen\domain\TPost
    */
   public $post = null;
 
@@ -30,7 +30,7 @@ class PostService_create_args {
         1 => array(
           'var' => 'post',
           'type' => TType::STRUCT,
-          'class' => '\thriftgen\domain\Post',
+          'class' => '\thriftgen\domain\TPost',
           ),
         );
     }
@@ -62,7 +62,7 @@ class PostService_create_args {
       {
         case 1:
           if ($ftype == TType::STRUCT) {
-            $this->post = new \thriftgen\domain\Post();
+            $this->post = new \thriftgen\domain\TPost();
             $xfer += $this->post->read($input);
           } else {
             $xfer += $input->skip($ftype);

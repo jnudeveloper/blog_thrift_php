@@ -17,7 +17,7 @@ use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
 
-class Tag {
+class TTag {
   static $_TSPEC;
 
   /**
@@ -97,7 +97,7 @@ class Tag {
   }
 
   public function getName() {
-    return 'Tag';
+    return 'TTag';
   }
 
   public function read($input)
@@ -169,7 +169,7 @@ class Tag {
 
   public function write($output) {
     $xfer = 0;
-    $xfer += $output->writeStructBegin('Tag');
+    $xfer += $output->writeStructBegin('TTag');
     if ($this->id !== null) {
       $xfer += $output->writeFieldBegin('id', TType::I32, 1);
       $xfer += $output->writeI32($this->id);

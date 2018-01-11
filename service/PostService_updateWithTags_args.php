@@ -20,11 +20,11 @@ class PostService_updateWithTags_args {
   static $_TSPEC;
 
   /**
-   * @var \thriftgen\domain\Post
+   * @var \thriftgen\domain\TPost
    */
   public $post = null;
   /**
-   * @var \thriftgen\domain\Tag[]
+   * @var \thriftgen\domain\TTag[]
    */
   public $tagList = null;
 
@@ -34,7 +34,7 @@ class PostService_updateWithTags_args {
         1 => array(
           'var' => 'post',
           'type' => TType::STRUCT,
-          'class' => '\thriftgen\domain\Post',
+          'class' => '\thriftgen\domain\TPost',
           ),
         2 => array(
           'var' => 'tagList',
@@ -42,7 +42,7 @@ class PostService_updateWithTags_args {
           'etype' => TType::STRUCT,
           'elem' => array(
             'type' => TType::STRUCT,
-            'class' => '\thriftgen\domain\Tag',
+            'class' => '\thriftgen\domain\TTag',
             ),
           ),
         );
@@ -78,7 +78,7 @@ class PostService_updateWithTags_args {
       {
         case 1:
           if ($ftype == TType::STRUCT) {
-            $this->post = new \thriftgen\domain\Post();
+            $this->post = new \thriftgen\domain\TPost();
             $xfer += $this->post->read($input);
           } else {
             $xfer += $input->skip($ftype);
@@ -93,7 +93,7 @@ class PostService_updateWithTags_args {
             for ($_i18 = 0; $_i18 < $_size14; ++$_i18)
             {
               $elem19 = null;
-              $elem19 = new \thriftgen\domain\Tag();
+              $elem19 = new \thriftgen\domain\TTag();
               $xfer += $elem19->read($input);
               $this->tagList []= $elem19;
             }
