@@ -87,15 +87,15 @@ class PostService_createWithTags_args {
         case 2:
           if ($ftype == TType::LST) {
             $this->tagList = array();
-            $_size7 = 0;
-            $_etype10 = 0;
-            $xfer += $input->readListBegin($_etype10, $_size7);
-            for ($_i11 = 0; $_i11 < $_size7; ++$_i11)
+            $_size14 = 0;
+            $_etype17 = 0;
+            $xfer += $input->readListBegin($_etype17, $_size14);
+            for ($_i18 = 0; $_i18 < $_size14; ++$_i18)
             {
-              $elem12 = null;
-              $elem12 = new \thriftgen\domain\TTag();
-              $xfer += $elem12->read($input);
-              $this->tagList []= $elem12;
+              $elem19 = null;
+              $elem19 = new \thriftgen\domain\TTag();
+              $xfer += $elem19->read($input);
+              $this->tagList []= $elem19;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -131,9 +131,9 @@ class PostService_createWithTags_args {
       {
         $output->writeListBegin(TType::STRUCT, count($this->tagList));
         {
-          foreach ($this->tagList as $iter13)
+          foreach ($this->tagList as $iter20)
           {
-            $xfer += $iter13->write($output);
+            $xfer += $iter20->write($output);
           }
         }
         $output->writeListEnd();

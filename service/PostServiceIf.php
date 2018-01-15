@@ -23,6 +23,15 @@ interface PostServiceIf {
    */
   public function find(\thriftgen\domain\TQuery $query);
   /**
+   * @return \thriftgen\domain\TPost[]
+   */
+  public function findAll();
+  /**
+   * @param int $id
+   * @return \thriftgen\domain\TPost
+   */
+  public function findById($id);
+  /**
    * @param \thriftgen\domain\TPost $post
    * @return \thriftgen\domain\TCUDResult
    */
