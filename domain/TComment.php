@@ -27,11 +27,11 @@ class TComment {
   /**
    * @var int
    */
-  public $post_id = null;
+  public $postId = null;
   /**
    * @var int
    */
-  public $parent_id = null;
+  public $parentId = null;
   /**
    * @var int
    */
@@ -43,19 +43,19 @@ class TComment {
   /**
    * @var int
    */
-  public $create_time = null;
+  public $createTime = null;
   /**
    * @var int
    */
-  public $update_time = null;
+  public $updateTime = null;
   /**
    * @var int
    */
-  public $author_id = null;
+  public $authorId = null;
   /**
    * @var int
    */
-  public $approve_num = null;
+  public $approveNum = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -65,11 +65,11 @@ class TComment {
           'type' => TType::I32,
           ),
         2 => array(
-          'var' => 'post_id',
+          'var' => 'postId',
           'type' => TType::I32,
           ),
         3 => array(
-          'var' => 'parent_id',
+          'var' => 'parentId',
           'type' => TType::I32,
           ),
         4 => array(
@@ -81,19 +81,19 @@ class TComment {
           'type' => TType::STRING,
           ),
         6 => array(
-          'var' => 'create_time',
+          'var' => 'createTime',
           'type' => TType::I32,
           ),
         7 => array(
-          'var' => 'update_time',
+          'var' => 'updateTime',
           'type' => TType::I32,
           ),
         8 => array(
-          'var' => 'author_id',
+          'var' => 'authorId',
           'type' => TType::I32,
           ),
         9 => array(
-          'var' => 'approve_num',
+          'var' => 'approveNum',
           'type' => TType::I32,
           ),
         );
@@ -102,11 +102,11 @@ class TComment {
       if (isset($vals['id'])) {
         $this->id = $vals['id'];
       }
-      if (isset($vals['post_id'])) {
-        $this->post_id = $vals['post_id'];
+      if (isset($vals['postId'])) {
+        $this->postId = $vals['postId'];
       }
-      if (isset($vals['parent_id'])) {
-        $this->parent_id = $vals['parent_id'];
+      if (isset($vals['parentId'])) {
+        $this->parentId = $vals['parentId'];
       }
       if (isset($vals['status'])) {
         $this->status = $vals['status'];
@@ -114,17 +114,17 @@ class TComment {
       if (isset($vals['content'])) {
         $this->content = $vals['content'];
       }
-      if (isset($vals['create_time'])) {
-        $this->create_time = $vals['create_time'];
+      if (isset($vals['createTime'])) {
+        $this->createTime = $vals['createTime'];
       }
-      if (isset($vals['update_time'])) {
-        $this->update_time = $vals['update_time'];
+      if (isset($vals['updateTime'])) {
+        $this->updateTime = $vals['updateTime'];
       }
-      if (isset($vals['author_id'])) {
-        $this->author_id = $vals['author_id'];
+      if (isset($vals['authorId'])) {
+        $this->authorId = $vals['authorId'];
       }
-      if (isset($vals['approve_num'])) {
-        $this->approve_num = $vals['approve_num'];
+      if (isset($vals['approveNum'])) {
+        $this->approveNum = $vals['approveNum'];
       }
     }
   }
@@ -157,14 +157,14 @@ class TComment {
           break;
         case 2:
           if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->post_id);
+            $xfer += $input->readI32($this->postId);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 3:
           if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->parent_id);
+            $xfer += $input->readI32($this->parentId);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -185,28 +185,28 @@ class TComment {
           break;
         case 6:
           if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->create_time);
+            $xfer += $input->readI32($this->createTime);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 7:
           if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->update_time);
+            $xfer += $input->readI32($this->updateTime);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 8:
           if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->author_id);
+            $xfer += $input->readI32($this->authorId);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 9:
           if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->approve_num);
+            $xfer += $input->readI32($this->approveNum);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -229,14 +229,14 @@ class TComment {
       $xfer += $output->writeI32($this->id);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->post_id !== null) {
-      $xfer += $output->writeFieldBegin('post_id', TType::I32, 2);
-      $xfer += $output->writeI32($this->post_id);
+    if ($this->postId !== null) {
+      $xfer += $output->writeFieldBegin('postId', TType::I32, 2);
+      $xfer += $output->writeI32($this->postId);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->parent_id !== null) {
-      $xfer += $output->writeFieldBegin('parent_id', TType::I32, 3);
-      $xfer += $output->writeI32($this->parent_id);
+    if ($this->parentId !== null) {
+      $xfer += $output->writeFieldBegin('parentId', TType::I32, 3);
+      $xfer += $output->writeI32($this->parentId);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->status !== null) {
@@ -249,24 +249,24 @@ class TComment {
       $xfer += $output->writeString($this->content);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->create_time !== null) {
-      $xfer += $output->writeFieldBegin('create_time', TType::I32, 6);
-      $xfer += $output->writeI32($this->create_time);
+    if ($this->createTime !== null) {
+      $xfer += $output->writeFieldBegin('createTime', TType::I32, 6);
+      $xfer += $output->writeI32($this->createTime);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->update_time !== null) {
-      $xfer += $output->writeFieldBegin('update_time', TType::I32, 7);
-      $xfer += $output->writeI32($this->update_time);
+    if ($this->updateTime !== null) {
+      $xfer += $output->writeFieldBegin('updateTime', TType::I32, 7);
+      $xfer += $output->writeI32($this->updateTime);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->author_id !== null) {
-      $xfer += $output->writeFieldBegin('author_id', TType::I32, 8);
-      $xfer += $output->writeI32($this->author_id);
+    if ($this->authorId !== null) {
+      $xfer += $output->writeFieldBegin('authorId', TType::I32, 8);
+      $xfer += $output->writeI32($this->authorId);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->approve_num !== null) {
-      $xfer += $output->writeFieldBegin('approve_num', TType::I32, 9);
-      $xfer += $output->writeI32($this->approve_num);
+    if ($this->approveNum !== null) {
+      $xfer += $output->writeFieldBegin('approveNum', TType::I32, 9);
+      $xfer += $output->writeI32($this->approveNum);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();

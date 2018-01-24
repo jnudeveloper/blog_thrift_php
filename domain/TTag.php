@@ -35,11 +35,11 @@ class TTag {
   /**
    * @var int
    */
-  public $create_time = null;
+  public $createTime = null;
   /**
    * @var int
    */
-  public $update_time = null;
+  public $updateTime = null;
   /**
    * @var int
    */
@@ -61,11 +61,11 @@ class TTag {
           'type' => TType::I32,
           ),
         4 => array(
-          'var' => 'create_time',
+          'var' => 'createTime',
           'type' => TType::I32,
           ),
         5 => array(
-          'var' => 'update_time',
+          'var' => 'updateTime',
           'type' => TType::I32,
           ),
         6 => array(
@@ -84,11 +84,11 @@ class TTag {
       if (isset($vals['frequency'])) {
         $this->frequency = $vals['frequency'];
       }
-      if (isset($vals['create_time'])) {
-        $this->create_time = $vals['create_time'];
+      if (isset($vals['createTime'])) {
+        $this->createTime = $vals['createTime'];
       }
-      if (isset($vals['update_time'])) {
-        $this->update_time = $vals['update_time'];
+      if (isset($vals['updateTime'])) {
+        $this->updateTime = $vals['updateTime'];
       }
       if (isset($vals['status'])) {
         $this->status = $vals['status'];
@@ -138,14 +138,14 @@ class TTag {
           break;
         case 4:
           if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->create_time);
+            $xfer += $input->readI32($this->createTime);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 5:
           if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->update_time);
+            $xfer += $input->readI32($this->updateTime);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -185,14 +185,14 @@ class TTag {
       $xfer += $output->writeI32($this->frequency);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->create_time !== null) {
-      $xfer += $output->writeFieldBegin('create_time', TType::I32, 4);
-      $xfer += $output->writeI32($this->create_time);
+    if ($this->createTime !== null) {
+      $xfer += $output->writeFieldBegin('createTime', TType::I32, 4);
+      $xfer += $output->writeI32($this->createTime);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->update_time !== null) {
-      $xfer += $output->writeFieldBegin('update_time', TType::I32, 5);
-      $xfer += $output->writeI32($this->update_time);
+    if ($this->updateTime !== null) {
+      $xfer += $output->writeFieldBegin('updateTime', TType::I32, 5);
+      $xfer += $output->writeI32($this->updateTime);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->status !== null) {
