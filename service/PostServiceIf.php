@@ -18,46 +18,45 @@ use Thrift\Exception\TApplicationException;
 
 interface PostServiceIf {
   /**
-   * @param \thriftgen\domain\TQuery $query
-   * @return \thriftgen\domain\TPost[]
+   * @param int $seq
+   * @return int
    */
-  public function find(\thriftgen\domain\TQuery $query);
+  public function ping($seq);
   /**
-   * @return \thriftgen\domain\TPost[]
+   * @param \thriftgen\domain\Request $req
+   * @return \thriftgen\domain\Response
    */
-  public function findAll();
+  public function findAll(\thriftgen\domain\Request $req);
   /**
-   * @param int $id
-   * @return \thriftgen\domain\TPost
+   * @param \thriftgen\domain\Request $req
+   * @return \thriftgen\domain\Response
    */
-  public function findById($id);
+  public function findById(\thriftgen\domain\Request $req);
   /**
-   * @param \thriftgen\domain\TPost $post
-   * @return \thriftgen\domain\TCUDResult
+   * @param \thriftgen\domain\Request $req
+   * @return \thriftgen\domain\Response
    */
-  public function create(\thriftgen\domain\TPost $post);
+  public function create(\thriftgen\domain\Request $req);
   /**
-   * @param \thriftgen\domain\TPost $post
-   * @param \thriftgen\domain\TTag[] $tagList
-   * @return \thriftgen\domain\TCUDResult
+   * @param \thriftgen\domain\Request $req
+   * @return \thriftgen\domain\Response
    */
-  public function createWithTags(\thriftgen\domain\TPost $post, array $tagList);
+  public function createWithTags(\thriftgen\domain\Request $req);
   /**
-   * @param \thriftgen\domain\TPost $post
-   * @return \thriftgen\domain\TCUDResult
+   * @param \thriftgen\domain\Request $req
+   * @return \thriftgen\domain\Response
    */
-  public function update(\thriftgen\domain\TPost $post);
+  public function update(\thriftgen\domain\Request $req);
   /**
-   * @param \thriftgen\domain\TPost $post
-   * @param \thriftgen\domain\TTag[] $tagList
-   * @return \thriftgen\domain\TCUDResult
+   * @param \thriftgen\domain\Request $req
+   * @return \thriftgen\domain\Response
    */
-  public function updateWithTags(\thriftgen\domain\TPost $post, array $tagList);
+  public function updateWithTags(\thriftgen\domain\Request $req);
   /**
-   * @param int $id
-   * @return \thriftgen\domain\TCUDResult
+   * @param \thriftgen\domain\Request $req
+   * @return \thriftgen\domain\Response
    */
-  public function deleteById($id);
+  public function deleteById(\thriftgen\domain\Request $req);
 }
 
 

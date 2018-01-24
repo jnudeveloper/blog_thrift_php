@@ -20,39 +20,23 @@ class PostService_createWithTags_args {
   static $_TSPEC;
 
   /**
-   * @var \thriftgen\domain\TPost
+   * @var \thriftgen\domain\Request
    */
-  public $post = null;
-  /**
-   * @var \thriftgen\domain\TTag[]
-   */
-  public $tagList = null;
+  public $req = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
         1 => array(
-          'var' => 'post',
+          'var' => 'req',
           'type' => TType::STRUCT,
-          'class' => '\thriftgen\domain\TPost',
-          ),
-        2 => array(
-          'var' => 'tagList',
-          'type' => TType::LST,
-          'etype' => TType::STRUCT,
-          'elem' => array(
-            'type' => TType::STRUCT,
-            'class' => '\thriftgen\domain\TTag',
-            ),
+          'class' => '\thriftgen\domain\Request',
           ),
         );
     }
     if (is_array($vals)) {
-      if (isset($vals['post'])) {
-        $this->post = $vals['post'];
-      }
-      if (isset($vals['tagList'])) {
-        $this->tagList = $vals['tagList'];
+      if (isset($vals['req'])) {
+        $this->req = $vals['req'];
       }
     }
   }
@@ -78,26 +62,8 @@ class PostService_createWithTags_args {
       {
         case 1:
           if ($ftype == TType::STRUCT) {
-            $this->post = new \thriftgen\domain\TPost();
-            $xfer += $this->post->read($input);
-          } else {
-            $xfer += $input->skip($ftype);
-          }
-          break;
-        case 2:
-          if ($ftype == TType::LST) {
-            $this->tagList = array();
-            $_size14 = 0;
-            $_etype17 = 0;
-            $xfer += $input->readListBegin($_etype17, $_size14);
-            for ($_i18 = 0; $_i18 < $_size14; ++$_i18)
-            {
-              $elem19 = null;
-              $elem19 = new \thriftgen\domain\TTag();
-              $xfer += $elem19->read($input);
-              $this->tagList []= $elem19;
-            }
-            $xfer += $input->readListEnd();
+            $this->req = new \thriftgen\domain\Request();
+            $xfer += $this->req->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -115,29 +81,12 @@ class PostService_createWithTags_args {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('PostService_createWithTags_args');
-    if ($this->post !== null) {
-      if (!is_object($this->post)) {
+    if ($this->req !== null) {
+      if (!is_object($this->req)) {
         throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
       }
-      $xfer += $output->writeFieldBegin('post', TType::STRUCT, 1);
-      $xfer += $this->post->write($output);
-      $xfer += $output->writeFieldEnd();
-    }
-    if ($this->tagList !== null) {
-      if (!is_array($this->tagList)) {
-        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
-      }
-      $xfer += $output->writeFieldBegin('tagList', TType::LST, 2);
-      {
-        $output->writeListBegin(TType::STRUCT, count($this->tagList));
-        {
-          foreach ($this->tagList as $iter20)
-          {
-            $xfer += $iter20->write($output);
-          }
-        }
-        $output->writeListEnd();
-      }
+      $xfer += $output->writeFieldBegin('req', TType::STRUCT, 1);
+      $xfer += $this->req->write($output);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();

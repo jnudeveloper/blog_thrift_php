@@ -27,34 +27,34 @@ class PostServiceClient implements \thriftgen\service\PostServiceIf {
     $this->output_ = $output ? $output : $input;
   }
 
-  public function find(\thriftgen\domain\TQuery $query)
+  public function ping($seq)
   {
-    $this->send_find($query);
-    return $this->recv_find();
+    $this->send_ping($seq);
+    return $this->recv_ping();
   }
 
-  public function send_find(\thriftgen\domain\TQuery $query)
+  public function send_ping($seq)
   {
-    $args = new \thriftgen\service\PostService_find_args();
-    $args->query = $query;
+    $args = new \thriftgen\service\PostService_ping_args();
+    $args->seq = $seq;
     $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
     if ($bin_accel)
     {
-      thrift_protocol_write_binary($this->output_, 'find', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+      thrift_protocol_write_binary($this->output_, 'ping', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
     }
     else
     {
-      $this->output_->writeMessageBegin('find', TMessageType::CALL, $this->seqid_);
+      $this->output_->writeMessageBegin('ping', TMessageType::CALL, $this->seqid_);
       $args->write($this->output_);
       $this->output_->writeMessageEnd();
       $this->output_->getTransport()->flush();
     }
   }
 
-  public function recv_find()
+  public function recv_ping()
   {
     $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
-    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, '\thriftgen\service\PostService_find_result', $this->input_->isStrictRead());
+    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, '\thriftgen\service\PostService_ping_result', $this->input_->isStrictRead());
     else
     {
       $rseqid = 0;
@@ -68,25 +68,26 @@ class PostServiceClient implements \thriftgen\service\PostServiceIf {
         $this->input_->readMessageEnd();
         throw $x;
       }
-      $result = new \thriftgen\service\PostService_find_result();
+      $result = new \thriftgen\service\PostService_ping_result();
       $result->read($this->input_);
       $this->input_->readMessageEnd();
     }
     if ($result->success !== null) {
       return $result->success;
     }
-    throw new \Exception("find failed: unknown result");
+    throw new \Exception("ping failed: unknown result");
   }
 
-  public function findAll()
+  public function findAll(\thriftgen\domain\Request $req)
   {
-    $this->send_findAll();
+    $this->send_findAll($req);
     return $this->recv_findAll();
   }
 
-  public function send_findAll()
+  public function send_findAll(\thriftgen\domain\Request $req)
   {
     $args = new \thriftgen\service\PostService_findAll_args();
+    $args->req = $req;
     $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
     if ($bin_accel)
     {
@@ -128,16 +129,16 @@ class PostServiceClient implements \thriftgen\service\PostServiceIf {
     throw new \Exception("findAll failed: unknown result");
   }
 
-  public function findById($id)
+  public function findById(\thriftgen\domain\Request $req)
   {
-    $this->send_findById($id);
+    $this->send_findById($req);
     return $this->recv_findById();
   }
 
-  public function send_findById($id)
+  public function send_findById(\thriftgen\domain\Request $req)
   {
     $args = new \thriftgen\service\PostService_findById_args();
-    $args->id = $id;
+    $args->req = $req;
     $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
     if ($bin_accel)
     {
@@ -179,16 +180,16 @@ class PostServiceClient implements \thriftgen\service\PostServiceIf {
     throw new \Exception("findById failed: unknown result");
   }
 
-  public function create(\thriftgen\domain\TPost $post)
+  public function create(\thriftgen\domain\Request $req)
   {
-    $this->send_create($post);
+    $this->send_create($req);
     return $this->recv_create();
   }
 
-  public function send_create(\thriftgen\domain\TPost $post)
+  public function send_create(\thriftgen\domain\Request $req)
   {
     $args = new \thriftgen\service\PostService_create_args();
-    $args->post = $post;
+    $args->req = $req;
     $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
     if ($bin_accel)
     {
@@ -230,17 +231,16 @@ class PostServiceClient implements \thriftgen\service\PostServiceIf {
     throw new \Exception("create failed: unknown result");
   }
 
-  public function createWithTags(\thriftgen\domain\TPost $post, array $tagList)
+  public function createWithTags(\thriftgen\domain\Request $req)
   {
-    $this->send_createWithTags($post, $tagList);
+    $this->send_createWithTags($req);
     return $this->recv_createWithTags();
   }
 
-  public function send_createWithTags(\thriftgen\domain\TPost $post, array $tagList)
+  public function send_createWithTags(\thriftgen\domain\Request $req)
   {
     $args = new \thriftgen\service\PostService_createWithTags_args();
-    $args->post = $post;
-    $args->tagList = $tagList;
+    $args->req = $req;
     $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
     if ($bin_accel)
     {
@@ -282,16 +282,16 @@ class PostServiceClient implements \thriftgen\service\PostServiceIf {
     throw new \Exception("createWithTags failed: unknown result");
   }
 
-  public function update(\thriftgen\domain\TPost $post)
+  public function update(\thriftgen\domain\Request $req)
   {
-    $this->send_update($post);
+    $this->send_update($req);
     return $this->recv_update();
   }
 
-  public function send_update(\thriftgen\domain\TPost $post)
+  public function send_update(\thriftgen\domain\Request $req)
   {
     $args = new \thriftgen\service\PostService_update_args();
-    $args->post = $post;
+    $args->req = $req;
     $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
     if ($bin_accel)
     {
@@ -333,17 +333,16 @@ class PostServiceClient implements \thriftgen\service\PostServiceIf {
     throw new \Exception("update failed: unknown result");
   }
 
-  public function updateWithTags(\thriftgen\domain\TPost $post, array $tagList)
+  public function updateWithTags(\thriftgen\domain\Request $req)
   {
-    $this->send_updateWithTags($post, $tagList);
+    $this->send_updateWithTags($req);
     return $this->recv_updateWithTags();
   }
 
-  public function send_updateWithTags(\thriftgen\domain\TPost $post, array $tagList)
+  public function send_updateWithTags(\thriftgen\domain\Request $req)
   {
     $args = new \thriftgen\service\PostService_updateWithTags_args();
-    $args->post = $post;
-    $args->tagList = $tagList;
+    $args->req = $req;
     $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
     if ($bin_accel)
     {
@@ -385,16 +384,16 @@ class PostServiceClient implements \thriftgen\service\PostServiceIf {
     throw new \Exception("updateWithTags failed: unknown result");
   }
 
-  public function deleteById($id)
+  public function deleteById(\thriftgen\domain\Request $req)
   {
-    $this->send_deleteById($id);
+    $this->send_deleteById($req);
     return $this->recv_deleteById();
   }
 
-  public function send_deleteById($id)
+  public function send_deleteById(\thriftgen\domain\Request $req)
   {
     $args = new \thriftgen\service\PostService_deleteById_args();
-    $args->id = $id;
+    $args->req = $req;
     $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
     if ($bin_accel)
     {

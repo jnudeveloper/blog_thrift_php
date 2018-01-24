@@ -19,11 +19,25 @@ use Thrift\Exception\TApplicationException;
 class PostService_findAll_args {
   static $_TSPEC;
 
+  /**
+   * @var \thriftgen\domain\Request
+   */
+  public $req = null;
 
-  public function __construct() {
+  public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
+        1 => array(
+          'var' => 'req',
+          'type' => TType::STRUCT,
+          'class' => '\thriftgen\domain\Request',
+          ),
         );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['req'])) {
+        $this->req = $vals['req'];
+      }
     }
   }
 
@@ -46,6 +60,14 @@ class PostService_findAll_args {
       }
       switch ($fid)
       {
+        case 1:
+          if ($ftype == TType::STRUCT) {
+            $this->req = new \thriftgen\domain\Request();
+            $xfer += $this->req->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
         default:
           $xfer += $input->skip($ftype);
           break;
@@ -59,6 +81,14 @@ class PostService_findAll_args {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('PostService_findAll_args');
+    if ($this->req !== null) {
+      if (!is_object($this->req)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('req', TType::STRUCT, 1);
+      $xfer += $this->req->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
     $xfer += $output->writeFieldStop();
     $xfer += $output->writeStructEnd();
     return $xfer;

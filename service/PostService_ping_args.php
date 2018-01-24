@@ -16,33 +16,32 @@ use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
 
-class CommentService_create_result {
+class PostService_ping_args {
   static $_TSPEC;
 
   /**
-   * @var \thriftgen\domain\TCUDResult
+   * @var int
    */
-  public $success = null;
+  public $seq = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
-        0 => array(
-          'var' => 'success',
-          'type' => TType::STRUCT,
-          'class' => '\thriftgen\domain\TCUDResult',
+        1 => array(
+          'var' => 'seq',
+          'type' => TType::I32,
           ),
         );
     }
     if (is_array($vals)) {
-      if (isset($vals['success'])) {
-        $this->success = $vals['success'];
+      if (isset($vals['seq'])) {
+        $this->seq = $vals['seq'];
       }
     }
   }
 
   public function getName() {
-    return 'CommentService_create_result';
+    return 'PostService_ping_args';
   }
 
   public function read($input)
@@ -60,10 +59,9 @@ class CommentService_create_result {
       }
       switch ($fid)
       {
-        case 0:
-          if ($ftype == TType::STRUCT) {
-            $this->success = new \thriftgen\domain\TCUDResult();
-            $xfer += $this->success->read($input);
+        case 1:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->seq);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -80,13 +78,10 @@ class CommentService_create_result {
 
   public function write($output) {
     $xfer = 0;
-    $xfer += $output->writeStructBegin('CommentService_create_result');
-    if ($this->success !== null) {
-      if (!is_object($this->success)) {
-        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
-      }
-      $xfer += $output->writeFieldBegin('success', TType::STRUCT, 0);
-      $xfer += $this->success->write($output);
+    $xfer += $output->writeStructBegin('PostService_ping_args');
+    if ($this->seq !== null) {
+      $xfer += $output->writeFieldBegin('seq', TType::I32, 1);
+      $xfer += $output->writeI32($this->seq);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();

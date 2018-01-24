@@ -20,7 +20,7 @@ class PostService_findAll_result {
   static $_TSPEC;
 
   /**
-   * @var \thriftgen\domain\TPost[]
+   * @var \thriftgen\domain\Response
    */
   public $success = null;
 
@@ -29,12 +29,8 @@ class PostService_findAll_result {
       self::$_TSPEC = array(
         0 => array(
           'var' => 'success',
-          'type' => TType::LST,
-          'etype' => TType::STRUCT,
-          'elem' => array(
-            'type' => TType::STRUCT,
-            'class' => '\thriftgen\domain\TPost',
-            ),
+          'type' => TType::STRUCT,
+          'class' => '\thriftgen\domain\Response',
           ),
         );
     }
@@ -65,19 +61,9 @@ class PostService_findAll_result {
       switch ($fid)
       {
         case 0:
-          if ($ftype == TType::LST) {
-            $this->success = array();
-            $_size7 = 0;
-            $_etype10 = 0;
-            $xfer += $input->readListBegin($_etype10, $_size7);
-            for ($_i11 = 0; $_i11 < $_size7; ++$_i11)
-            {
-              $elem12 = null;
-              $elem12 = new \thriftgen\domain\TPost();
-              $xfer += $elem12->read($input);
-              $this->success []= $elem12;
-            }
-            $xfer += $input->readListEnd();
+          if ($ftype == TType::STRUCT) {
+            $this->success = new \thriftgen\domain\Response();
+            $xfer += $this->success->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -96,20 +82,11 @@ class PostService_findAll_result {
     $xfer = 0;
     $xfer += $output->writeStructBegin('PostService_findAll_result');
     if ($this->success !== null) {
-      if (!is_array($this->success)) {
+      if (!is_object($this->success)) {
         throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
       }
-      $xfer += $output->writeFieldBegin('success', TType::LST, 0);
-      {
-        $output->writeListBegin(TType::STRUCT, count($this->success));
-        {
-          foreach ($this->success as $iter13)
-          {
-            $xfer += $iter13->write($output);
-          }
-        }
-        $output->writeListEnd();
-      }
+      $xfer += $output->writeFieldBegin('success', TType::STRUCT, 0);
+      $xfer += $this->success->write($output);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();

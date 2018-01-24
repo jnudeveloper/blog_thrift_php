@@ -20,23 +20,23 @@ class PostService_create_args {
   static $_TSPEC;
 
   /**
-   * @var \thriftgen\domain\TPost
+   * @var \thriftgen\domain\Request
    */
-  public $post = null;
+  public $req = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
         1 => array(
-          'var' => 'post',
+          'var' => 'req',
           'type' => TType::STRUCT,
-          'class' => '\thriftgen\domain\TPost',
+          'class' => '\thriftgen\domain\Request',
           ),
         );
     }
     if (is_array($vals)) {
-      if (isset($vals['post'])) {
-        $this->post = $vals['post'];
+      if (isset($vals['req'])) {
+        $this->req = $vals['req'];
       }
     }
   }
@@ -62,8 +62,8 @@ class PostService_create_args {
       {
         case 1:
           if ($ftype == TType::STRUCT) {
-            $this->post = new \thriftgen\domain\TPost();
-            $xfer += $this->post->read($input);
+            $this->req = new \thriftgen\domain\Request();
+            $xfer += $this->req->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -81,12 +81,12 @@ class PostService_create_args {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('PostService_create_args');
-    if ($this->post !== null) {
-      if (!is_object($this->post)) {
+    if ($this->req !== null) {
+      if (!is_object($this->req)) {
         throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
       }
-      $xfer += $output->writeFieldBegin('post', TType::STRUCT, 1);
-      $xfer += $this->post->write($output);
+      $xfer += $output->writeFieldBegin('req', TType::STRUCT, 1);
+      $xfer += $this->req->write($output);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();

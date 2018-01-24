@@ -20,7 +20,7 @@ class PostService_findById_result {
   static $_TSPEC;
 
   /**
-   * @var \thriftgen\domain\TPost
+   * @var \thriftgen\domain\Response
    */
   public $success = null;
 
@@ -30,7 +30,7 @@ class PostService_findById_result {
         0 => array(
           'var' => 'success',
           'type' => TType::STRUCT,
-          'class' => '\thriftgen\domain\TPost',
+          'class' => '\thriftgen\domain\Response',
           ),
         );
     }
@@ -62,7 +62,7 @@ class PostService_findById_result {
       {
         case 0:
           if ($ftype == TType::STRUCT) {
-            $this->success = new \thriftgen\domain\TPost();
+            $this->success = new \thriftgen\domain\Response();
             $xfer += $this->success->read($input);
           } else {
             $xfer += $input->skip($ftype);

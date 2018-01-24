@@ -17,7 +17,7 @@ use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
 
-class TCUDResult {
+class Response {
   static $_TSPEC;
 
   /**
@@ -25,13 +25,13 @@ class TCUDResult {
    */
   public $code = null;
   /**
-   * @var int
+   * @var string
    */
-  public $id = null;
+  public $msg = null;
   /**
    * @var string
    */
-  public $information = null;
+  public $data = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -41,11 +41,11 @@ class TCUDResult {
           'type' => TType::I32,
           ),
         2 => array(
-          'var' => 'id',
-          'type' => TType::I32,
+          'var' => 'msg',
+          'type' => TType::STRING,
           ),
         3 => array(
-          'var' => 'information',
+          'var' => 'data',
           'type' => TType::STRING,
           ),
         );
@@ -54,17 +54,17 @@ class TCUDResult {
       if (isset($vals['code'])) {
         $this->code = $vals['code'];
       }
-      if (isset($vals['id'])) {
-        $this->id = $vals['id'];
+      if (isset($vals['msg'])) {
+        $this->msg = $vals['msg'];
       }
-      if (isset($vals['information'])) {
-        $this->information = $vals['information'];
+      if (isset($vals['data'])) {
+        $this->data = $vals['data'];
       }
     }
   }
 
   public function getName() {
-    return 'TCUDResult';
+    return 'Response';
   }
 
   public function read($input)
@@ -90,15 +90,15 @@ class TCUDResult {
           }
           break;
         case 2:
-          if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->id);
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->msg);
           } else {
             $xfer += $input->skip($ftype);
           }
           break;
         case 3:
           if ($ftype == TType::STRING) {
-            $xfer += $input->readString($this->information);
+            $xfer += $input->readString($this->data);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -115,20 +115,20 @@ class TCUDResult {
 
   public function write($output) {
     $xfer = 0;
-    $xfer += $output->writeStructBegin('TCUDResult');
+    $xfer += $output->writeStructBegin('Response');
     if ($this->code !== null) {
       $xfer += $output->writeFieldBegin('code', TType::I32, 1);
       $xfer += $output->writeI32($this->code);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->id !== null) {
-      $xfer += $output->writeFieldBegin('id', TType::I32, 2);
-      $xfer += $output->writeI32($this->id);
+    if ($this->msg !== null) {
+      $xfer += $output->writeFieldBegin('msg', TType::STRING, 2);
+      $xfer += $output->writeString($this->msg);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->information !== null) {
-      $xfer += $output->writeFieldBegin('information', TType::STRING, 3);
-      $xfer += $output->writeString($this->information);
+    if ($this->data !== null) {
+      $xfer += $output->writeFieldBegin('data', TType::STRING, 3);
+      $xfer += $output->writeString($this->data);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();

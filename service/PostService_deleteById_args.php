@@ -20,22 +20,23 @@ class PostService_deleteById_args {
   static $_TSPEC;
 
   /**
-   * @var int
+   * @var \thriftgen\domain\Request
    */
-  public $id = null;
+  public $req = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
         1 => array(
-          'var' => 'id',
-          'type' => TType::I32,
+          'var' => 'req',
+          'type' => TType::STRUCT,
+          'class' => '\thriftgen\domain\Request',
           ),
         );
     }
     if (is_array($vals)) {
-      if (isset($vals['id'])) {
-        $this->id = $vals['id'];
+      if (isset($vals['req'])) {
+        $this->req = $vals['req'];
       }
     }
   }
@@ -60,8 +61,9 @@ class PostService_deleteById_args {
       switch ($fid)
       {
         case 1:
-          if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->id);
+          if ($ftype == TType::STRUCT) {
+            $this->req = new \thriftgen\domain\Request();
+            $xfer += $this->req->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -79,9 +81,12 @@ class PostService_deleteById_args {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('PostService_deleteById_args');
-    if ($this->id !== null) {
-      $xfer += $output->writeFieldBegin('id', TType::I32, 1);
-      $xfer += $output->writeI32($this->id);
+    if ($this->req !== null) {
+      if (!is_object($this->req)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('req', TType::STRUCT, 1);
+      $xfer += $this->req->write($output);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();

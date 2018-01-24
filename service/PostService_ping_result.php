@@ -16,11 +16,11 @@ use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
 
 
-class CommentService_find_result {
+class PostService_ping_result {
   static $_TSPEC;
 
   /**
-   * @var \thriftgen\domain\TComment[]
+   * @var int
    */
   public $success = null;
 
@@ -29,12 +29,7 @@ class CommentService_find_result {
       self::$_TSPEC = array(
         0 => array(
           'var' => 'success',
-          'type' => TType::LST,
-          'etype' => TType::STRUCT,
-          'elem' => array(
-            'type' => TType::STRUCT,
-            'class' => '\thriftgen\domain\TComment',
-            ),
+          'type' => TType::I32,
           ),
         );
     }
@@ -46,7 +41,7 @@ class CommentService_find_result {
   }
 
   public function getName() {
-    return 'CommentService_find_result';
+    return 'PostService_ping_result';
   }
 
   public function read($input)
@@ -65,19 +60,8 @@ class CommentService_find_result {
       switch ($fid)
       {
         case 0:
-          if ($ftype == TType::LST) {
-            $this->success = array();
-            $_size0 = 0;
-            $_etype3 = 0;
-            $xfer += $input->readListBegin($_etype3, $_size0);
-            for ($_i4 = 0; $_i4 < $_size0; ++$_i4)
-            {
-              $elem5 = null;
-              $elem5 = new \thriftgen\domain\TComment();
-              $xfer += $elem5->read($input);
-              $this->success []= $elem5;
-            }
-            $xfer += $input->readListEnd();
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->success);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -94,22 +78,10 @@ class CommentService_find_result {
 
   public function write($output) {
     $xfer = 0;
-    $xfer += $output->writeStructBegin('CommentService_find_result');
+    $xfer += $output->writeStructBegin('PostService_ping_result');
     if ($this->success !== null) {
-      if (!is_array($this->success)) {
-        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
-      }
-      $xfer += $output->writeFieldBegin('success', TType::LST, 0);
-      {
-        $output->writeListBegin(TType::STRUCT, count($this->success));
-        {
-          foreach ($this->success as $iter6)
-          {
-            $xfer += $iter6->write($output);
-          }
-        }
-        $output->writeListEnd();
-      }
+      $xfer += $output->writeFieldBegin('success', TType::I32, 0);
+      $xfer += $output->writeI32($this->success);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
