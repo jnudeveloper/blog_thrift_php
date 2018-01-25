@@ -44,6 +44,10 @@ class Request {
    * @var string
    */
   public $data = null;
+  /**
+   * @var string
+   */
+  public $version = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -72,6 +76,10 @@ class Request {
           'var' => 'data',
           'type' => TType::STRING,
           ),
+        7 => array(
+          'var' => 'version',
+          'type' => TType::STRING,
+          ),
         );
     }
     if (is_array($vals)) {
@@ -92,6 +100,9 @@ class Request {
       }
       if (isset($vals['data'])) {
         $this->data = $vals['data'];
+      }
+      if (isset($vals['version'])) {
+        $this->version = $vals['version'];
       }
     }
   }
@@ -157,6 +168,13 @@ class Request {
             $xfer += $input->skip($ftype);
           }
           break;
+        case 7:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->version);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
         default:
           $xfer += $input->skip($ftype);
           break;
@@ -198,6 +216,11 @@ class Request {
     if ($this->data !== null) {
       $xfer += $output->writeFieldBegin('data', TType::STRING, 6);
       $xfer += $output->writeString($this->data);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->version !== null) {
+      $xfer += $output->writeFieldBegin('version', TType::STRING, 7);
+      $xfer += $output->writeString($this->version);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
